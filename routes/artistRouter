@@ -1,0 +1,20 @@
+const artists = ['Deerhoof', 'Deerhunter', 'Dirty Snacks Ensemble'];
+const express = require('express');
+const artistRouter = express.Router();
+
+artistRouter.route('/')
+    .all((res, req, next) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        next();
+    })
+
+    .get((req, res) => {
+        res.send(artists);
+    })
+    .post((res, req) => {
+        artists.push(req.body.artists);
+        res.send(artists)
+    })
+
+module.exports = artistRouter;
